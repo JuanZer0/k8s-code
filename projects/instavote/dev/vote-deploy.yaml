@@ -10,7 +10,7 @@ spec:
       maxUnavailable: 1
   revisionHistoryLimit: 4
   paused: false
-  replicas: 8
+  replicas: 15
   minReadySeconds: 20
   selector:
     matchLabels:
@@ -23,11 +23,11 @@ spec:
       labels:
         app: python
         role: vote
-        version: v2
+        version: v3
     spec:
       containers:
         - name: app
-          image: schoolofdevops/vote:v2
+          image: schoolofdevops/vote:v3
           ports:
             - containerPort: 80
               protocol: TCP
