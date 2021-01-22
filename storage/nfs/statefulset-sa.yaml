@@ -18,13 +18,16 @@ spec:
   selector:
     app: nfs-provisioner
 ---
+apiVersion: apps/v1
 kind: StatefulSet
-apiVersion: apps/v1beta1
 metadata:
   name: nfs-provisioner
 spec:
   serviceName: "nfs-provisioner"
   replicas: 1
+  selector:
+    matchLabels:
+      app: nfs-provisioner
   template:
     metadata:
       labels:

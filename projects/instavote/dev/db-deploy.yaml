@@ -19,13 +19,20 @@ spec:
         version: "9.4"
     spec:
       containers:
-      - image: postgres:9.4
+      - env:
+        - name: POSTGRES_HOST_AUTH_METHOD
+          value: trust
+        image: postgres:9.4
         imagePullPolicy: Always
         name: db
         ports:
         - containerPort: 5432
           protocol: TCP
-      - env
-        - name: POSTGRES_HOST_AUTH_METHOD
-          value: trust
+        volumeMounts:
+        - name: db-vol
+          mountPath: /var/lib/postgresql/data
+      volumes:
+      - name: db-vol
+        persistentVolumeClaim:
+          claimName: db-pvc
       restartPolicy: Always
