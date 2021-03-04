@@ -13,4 +13,4 @@ spec:
       nodePort: 30001
   type: NodePort
   externalIPs:
-    - 91.211.152.187
+    - 10.128.0.4

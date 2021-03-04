@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: vote
+  name: vote-canary
   namespace: instavote
 spec:
   strategy:
@@ -11,7 +11,7 @@ spec:
       maxUnavailable: 1
   revisionHistoryLimit: 4
   paused: false
-  replicas: 15
+  replicas: 3
   minReadySeconds: 20
   selector:
     matchLabels:
@@ -30,9 +30,6 @@ spec:
         - name: vote
           image: schoolofdevops/vote:v4
           imagePullPolicy: Always
-          envFrom:
-            - configMapRef:
-                name: vote
           ports:
             - containerPort: 80
               protocol: TCP

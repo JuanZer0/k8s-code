@@ -1,8 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: vote
-  namespace: instavote
+  name: vote-green
 spec:
   strategy:
     type: RollingUpdate
@@ -17,23 +16,20 @@ spec:
     matchLabels:
       role: vote
     matchExpressions:
-      - {key: version, operator: In, values: [v1, v2, v3, v4, v5]}
+      - {key: version, operator: In, values: [v1, v2, v3, v4]}
   template:
     metadata:
       name: vote
       labels:
         app: python
         role: vote
-        version: v4
+        version: v3
+        release: bluegreen
+        code: green
     spec:
       containers:
-        - name: vote
+        - name: app
           image: schoolofdevops/vote:v4
-          imagePullPolicy: Always
-          envFrom:
-            - configMapRef:
-                name: vote
           ports:
             - containerPort: 80
               protocol: TCP
-      restartPolicy: Always

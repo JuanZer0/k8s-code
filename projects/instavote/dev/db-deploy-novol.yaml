@@ -22,27 +22,10 @@ spec:
       - env:
         - name: POSTGRES_HOST_AUTH_METHOD
           value: trust
-        - name: POSTGRES_USER
-          valueFrom:
-            secretKeyRef:
-              name: db
-              key: POSTGRES_USER
-        - name: POSTGRES_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: db
-              key: POSTGRES_PASSWORD
         image: postgres:9.4
         imagePullPolicy: Always
         name: db
         ports:
         - containerPort: 5432
           protocol: TCP
-        volumeMounts:
-        - name: db-vol
-          mountPath: /var/lib/postgresql/data
-      volumes:
-      - name: db-vol
-        persistentVolumeClaim:
-          claimName: db-pvc
       restartPolicy: Always

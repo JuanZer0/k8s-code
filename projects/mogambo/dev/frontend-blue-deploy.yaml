@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: front-end
+  name: front-end-blue
   namespace: mogambo
 spec:
   replicas: 3
@@ -22,9 +22,10 @@ spec:
         app: front-end
         role: ui
         tier: front
+        code: blue
     spec:
       containers:
-      - image: schoolofdevops/frontend:v2.0
+      - image: schoolofdevops/frontend:v1.0
         imagePullPolicy: Always
         name: front-end
         ports:
